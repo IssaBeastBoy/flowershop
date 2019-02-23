@@ -6,7 +6,7 @@ namespace FlowerShop
 {
     public class Order : IOrder, IIdentified
     {
-        private List<Flower> flowers;
+        public List<Flower> flowers;
         private bool isDelivered = false;
         public int Id { get; }
 
@@ -30,10 +30,12 @@ namespace FlowerShop
         }
 
         public IClient Client { get; private set; }
+        public IOrderDAO deliver;
 
         public Order(IOrderDAO dao, IClient client)
         {
             Id = dao.AddOrder(client);
+            deliver = dao;
         }
 
         // used when we already have an order with an Id.
@@ -43,16 +45,17 @@ namespace FlowerShop
             this.isDelivered = isDelivered;
             Client = client;
             Id = dao.AddOrder(client);
+            deliver = dao;
         }
 
-        public void AddFlowers(IFlower flower, int n)
+        public void AddFlowers(Flower flower, int n)
         {
-            throw new NotImplementedException();
+           
         }
 
         public void Deliver()
         {
-           throw new NotImplementedException();
+            deliver.SetDelivered(this);
         }
     }
 }

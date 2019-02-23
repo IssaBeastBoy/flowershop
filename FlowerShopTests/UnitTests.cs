@@ -1,14 +1,21 @@
 using NUnit.Framework;
 using NSubstitute;
 using FlowerShop;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Tests
 {
     public class Tests
     {
-        private IOrderDAO _iorderDAO;
-        private IClient _iclient;
-        private IOrder _iorder;
+        public IOrderDAO _iorderDAO;
+        public IClient _iclient;
+        public IOrder _iorder;
+        public IFlower _iflowers;
+        public IFlowerDAO _iflowerDAO;
 
         [SetUp]
         public void Setup()
@@ -16,8 +23,11 @@ namespace Tests
             _iorderDAO=Substitute.For<IOrderDAO>();
             _iclient=Substitute.For<IClient>();
             _iorder=Substitute.For<IOrder>();
+            _iflowers = Substitute.For<IFlower>();
+            _iflowerDAO = Substitute.For<IFlowerDAO>();
+            
         }
-
+        
         [Test]
         public void Test1()
         {
@@ -26,7 +36,8 @@ namespace Tests
             //act
             testing.Deliver();
             //assert
-            Assert.AreEqual(1,_iorderDAO.ReceivedCalls());
+            Assert.AreEqual(2,_iorderDAO.ReceivedCalls().Count());
         }
+        
     }
 }
