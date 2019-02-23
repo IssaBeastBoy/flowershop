@@ -38,6 +38,17 @@ namespace Tests
             //assert
             Assert.AreEqual(2,_iorderDAO.ReceivedCalls().Count());
         }
-        
+
+        //unedited price file
+        [Test]
+        public void Test2()
+        {
+            //Arrange
+            var testing = new Order(_iorderDAO, _iclient, true);
+            //act
+
+            //assert
+            Assert.AreEqual(0, testing.Price);
+        }
     }
 }
