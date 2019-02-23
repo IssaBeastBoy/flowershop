@@ -55,7 +55,10 @@ namespace FlowerShop
 
         public void AddFlowers(Flower flower, int n)
         {
-           
+            for (int stop = 0; stop < n && flower.Stock >= n; stop++)
+            {
+                flowers.Add(flower);
+            }
         }
 
         public void Deliver()

@@ -50,5 +50,21 @@ namespace Tests
             //assert
             Assert.AreEqual(0, testing.Price);
         }
+        [Test]
+        public void Test3()
+        {
+
+            //Arrange
+            Flower adding = new Flower(_iflowerDAO, "Roses", 100, 10);
+            var testing = new Order(_iorderDAO, _iclient, true);
+            //act
+            testing.AddFlowers(adding, 1);
+            Console.WriteLine(testing.flowers[0]);
+
+
+            //assert
+            Assert.AreEqual(120, testing.Price);
+
+        }
     }
 }
